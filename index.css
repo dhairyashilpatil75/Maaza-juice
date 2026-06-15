@@ -33,9 +33,7 @@ body {
     color: var(--color-text);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    min-height: 200vh;
-    overflow: hidden;
-
+    min-height: 100vh;
 }
 
 /* Custom Scrollbar for premium feel */

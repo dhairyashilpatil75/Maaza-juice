@@ -9,24 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-   <style>
-        /* Tiny cursor-following cat */
-        #tiny-cat{
+    <style>
+        /* Smoke trail for cursor movement */
+        .smoke-puff{
             position: fixed;
-            left: 0;
-            top: 0;
-            width: 28px;
-            height: 28px;
-            transform: translate(-50%,-120%);
-            font-size: 22px;
-            line-height: 1;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             pointer-events: none;
-            transition: left 0.12s linear, top 0.12s linear, transform 0.12s linear;
+            background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.2) 55%, rgba(255,255,255,0) 100%);
+            filter: blur(8px);
+            transform: translate(-50%, -50%) scale(0.4);
+            animation: smoke-fade 0.9s ease-out forwards;
             z-index: 9999;
-            user-select: none;
-            -webkit-user-select: none;
         }
-        #tiny-cat.following{ transform: translate(-50%,-110%) scale(1.03); }
+        @keyframes smoke-fade {
+            0% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(0.4);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -160%) scale(1.8);
+            }
+        }
     </style>
 </head>
 <body>
@@ -153,32 +159,30 @@
 
     <!-- Main JavaScript -->
     <script src="index.js"></script>
-    <div id="tiny-cat" aria-hidden="true">🐱</div>
     <script>
         (function(){
-            const cat = document.getElementById('tiny-cat');
-            if(!cat) return;
-            let idleTimer = null;
-            const IDLE_MS = 400;
+            let lastSmoke = 0;
+            const smokeThrottle = 30;
 
-            function onMove(e){
-                clearTimeout(idleTimer);
-                cat.classList.add('following');
-                const x = e.clientX;
-                const y = e.clientY;
-                cat.style.left = x + 'px';
-                cat.style.top = y + 'px';
-                idleTimer = setTimeout(()=>{
-                    cat.classList.remove('following');
-                }, IDLE_MS);
+            function createSmoke(x, y) {
+                const puff = document.createElement('span');
+                puff.className = 'smoke-puff';
+                puff.style.left = x + 'px';
+                puff.style.top = y + 'px';
+                document.body.appendChild(puff);
+                puff.addEventListener('animationend', () => puff.remove());
             }
 
-            // Update position on mouse move
-            document.addEventListener('mousemove', onMove, {passive:true});
+            function onMove(e) {
+                const now = Date.now();
+                if (now - lastSmoke < smokeThrottle) return;
+                lastSmoke = now;
+                createSmoke(e.clientX, e.clientY);
+            }
 
-            // Also support touch as cursor movement on touch devices
+            document.addEventListener('mousemove', onMove, {passive:true});
             document.addEventListener('touchmove', function(e){
-                if(e.touches && e.touches[0]){
+                if (e.touches && e.touches[0]) {
                     onMove(e.touches[0]);
                 }
             }, {passive:true});

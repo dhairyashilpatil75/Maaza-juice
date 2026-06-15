@@ -10,21 +10,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
    <style>
-body {
-    background-color: #000;
-    width: 100vw;
-    height: 200vh;
-    overflow: hidden;
-}
-
-#fluid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100dvw;
-    height: 100dvh;
-}
-</style>
+        /* Tiny cursor-following cat */
+        #tiny-cat{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            transform: translate(-50%,-120%);
+            font-size: 22px;
+            line-height: 1;
+            pointer-events: none;
+            transition: left 0.12s linear, top 0.12s linear, transform 0.12s linear;
+            z-index: 9999;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #tiny-cat.following{ transform: translate(-50%,-110%) scale(1.03); }
+    </style>
 </head>
 <body>
     <!-- Loading Overlay -->

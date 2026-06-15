@@ -9,6 +9,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Tiny cursor-following cat */
+        #tiny-cat{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            transform: translate(-50%,-120%);
+            font-size: 22px;
+            line-height: 1;
+            pointer-events: none;
+            transition: left 0.12s linear, top 0.12s linear, transform 0.12s linear;
+            z-index: 9999;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #tiny-cat.following{ transform: translate(-50%,-110%) scale(1.03); }
+    </style>
 </head>
 <body>
     <!-- Loading Overlay -->
@@ -134,5 +153,36 @@
 
     <!-- Main JavaScript -->
     <script src="index.js"></script>
+    <div id="tiny-cat" aria-hidden="true">🐱</div>
+    <script>
+        (function(){
+            const cat = document.getElementById('tiny-cat');
+            if(!cat) return;
+            let idleTimer = null;
+            const IDLE_MS = 400;
+
+            function onMove(e){
+                clearTimeout(idleTimer);
+                cat.classList.add('following');
+                const x = e.clientX;
+                const y = e.clientY;
+                cat.style.left = x + 'px';
+                cat.style.top = y + 'px';
+                idleTimer = setTimeout(()=>{
+                    cat.classList.remove('following');
+                }, IDLE_MS);
+            }
+
+            // Update position on mouse move
+            document.addEventListener('mousemove', onMove, {passive:true});
+
+            // Also support touch as cursor movement on touch devices
+            document.addEventListener('touchmove', function(e){
+                if(e.touches && e.touches[0]){
+                    onMove(e.touches[0]);
+                }
+            }, {passive:true});
+        })();
+    </script>
 </body>
 </html>

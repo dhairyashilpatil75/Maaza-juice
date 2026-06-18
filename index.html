@@ -13,30 +13,30 @@
         /* Neon trail for cursor movement */
         .neon-trail {
             position: fixed;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
+            width: 42px;
+            height: 6px;
+            border-radius: 4px;
             pointer-events: none;
-            background: rgba(255, 209, 102, 0.95);
+            background: linear-gradient(90deg, rgba(255, 209, 102, 0.95), rgba(255, 145, 0, 0.9));
             box-shadow:
-                0 0 12px rgba(255, 209, 102, 0.85),
-                0 0 28px rgba(255, 145, 0, 0.7),
-                0 0 42px rgba(255, 85, 0, 0.5);
+                0 0 16px rgba(255, 209, 102, 0.85),
+                0 0 32px rgba(255, 145, 0, 0.7),
+                0 0 52px rgba(255, 85, 0, 0.45);
             transform: translate(-50%, -50%) scale(1);
-            animation: neon-fade 0.8s ease-out forwards;
+            animation: neon-fade 0.75s ease-out forwards;
             z-index: 9999;
         }
         @keyframes neon-fade {
             0% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scaleX(1) scaleY(1);
             }
             100% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(2.2);
+                transform: translate(-50%, -50%) scaleX(1.4) scaleY(0.8);
                 box-shadow:
                     0 0 2px rgba(255, 209, 102, 0.1),
-                    0 0 8px rgba(255, 145, 0, 0.08);
+                    0 0 10px rgba(255, 145, 0, 0.08);
             }
         }
     </style>

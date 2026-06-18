@@ -145,6 +145,12 @@ body {
     transform: scale(1.05);
 }
 
+.logo-symbol {
+    font-size: 2rem;
+    line-height: 1;
+    margin-left: 1rem;
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -592,91 +598,3 @@ body {
         padding: 0 5%;
     }
 }
-
-/* Ingredients modal */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    z-index: 2000;
-}
-
-.modal-open {
-    display: flex;
-}
-
-.modal-content {
-    width: min(900px, 100%);
-    max-height: min(90vh, 800px);
-    overflow-y: auto;
-    background: rgba(10, 5, 3, 0.98);
-    border: 1px solid rgba(255, 145, 0, 0.2);
-    border-radius: 28px;
-    padding: 2rem;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
-    position: relative;
-}
-
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition: background 0.25s ease;
-}
-
-.modal-close:hover {
-    background: rgba(255, 145, 0, 0.22);
-}
-
-.modal-header h2 {
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    text-shadow: 0 0 18px rgba(255, 145, 0, 0.3);
-}
-
-.modal-body {
-    display: grid;
-    gap: 1rem;
-}
-
-.ingredient-card {
-    display: grid;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 145, 0, 0.14);
-    border-radius: 20px;
-    padding: 1.7rem 1.5rem;
-}
-
-.ingredient-card-title {
-    font-size: 1.05rem;
-    color: var(--color-text);
-    line-height: 1.7;
-    letter-spacing: 0.2px;
-}
-
-@media(max-width: 768px) {
-    .modal-content {
-        padding: 1.5rem;
-    }
-
-    .modal-header h2 {
-        font-size: 2rem;
-    }
-}
-

@@ -131,6 +131,13 @@ const preloadImages = () => {
             console.error(`Failed to load frame ${i}`);
             // Still count to prevent hanging the loader
             loadedCount++;
+            if (loadedCount === frameCount) {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                    resizeCanvas();
+                    requestAnimationFrame(updateAnimation);
+                }, 400);
+            }
         };
         img.src = getFramePath(i);
         images.push(img);

@@ -59,13 +59,35 @@
         <nav class="nav-links">
             <a href="#experience" class="nav-link">The Experience</a>
             <a href="#features" class="nav-link">Craftsmanship</a>
-            <a href="./ingredients.html" class="nav-link">Ingredients</a>
+            <a href="#" class="nav-link" id="ingredients-link">Ingredients</a>
         </nav>
         <div class="logo-symbol">🥭</div>
     </header>
 
     <!-- Background Grid Effect -->
     <div class="bg-grid"></div>
+
+    <!-- Ingredients Modal -->
+    <div id="ingredients-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close" aria-label="Close ingredients popup">×</button>
+            <div class="modal-header">
+                <h2>Ingredients</h2>
+            </div>
+            <div class="modal-body">
+                <div class="ingredient-card">
+                    <div class="ingredient-card-title">Water</div>
+                    <div class="ingredient-card-title">Mango Pulp (10.7%)</div>
+                    <div class="ingredient-card-title">Sugar</div>
+                    <div class="ingredient-card-title">Acidity Regulators (300, 331(iii))</div>
+                    <div class="ingredient-card-title">Stabilizer (466)</div>
+                    <div class="ingredient-card-title">Antioxidant (300)</div>
+                    <div class="ingredient-card-title">Colour (110)</div>
+                    <div class="ingredient-card-title">Mango Flavours (Nature-Identical & Artificial Flavoring Substances)</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Scroll Container -->
     <main class="scroll-container">
@@ -193,6 +215,31 @@
                     onMove(e.touches[0]);
                 }
             }, {passive:true});
+
+            const ingredientsLink = document.getElementById('ingredients-link');
+            const ingredientsModal = document.getElementById('ingredients-modal');
+            const modalClose = document.getElementById('modal-close');
+
+            function openModal(event) {
+                event.preventDefault();
+                ingredientsModal.classList.add('modal-open');
+                ingredientsModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                ingredientsModal.classList.remove('modal-open');
+                ingredientsModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            ingredientsLink.addEventListener('click', openModal);
+            modalClose.addEventListener('click', closeModal);
+            ingredientsModal.addEventListener('click', function(event) {
+                if (event.target === ingredientsModal) {
+                    closeModal();
+                }
+            });
         })();
     </script>
 </body>

@@ -59,6 +59,17 @@
         <div class="logo-symbol">🥭</div>
     </header>
 
+    <!-- Post-Login Loading Overlay -->
+    <div id="post-login-loader" class="loader-container" style="display: none;">
+        <div class="loader-content">
+            <div class="logo-loader">maaza</div>
+            <div class="progress-bar-bg">
+                <div id="post-login-progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <p class="loader-text">Preparing Your Mango Experience... <span id="post-login-progress-percent">0%</span></p>
+        </div>
+    </div>
+
     <!-- Login Page Overlay -->
     <div id="login-page" class="login-page" aria-hidden="false">
         <div class="login-panel">
@@ -78,9 +89,6 @@
                 </div>
                 <div class="login-actions">
                     <button type="submit" class="btn-primary">Login</button>
-                    <div class="login-links">
-                        <a href="#" id="continue-guest">Continue without login</a>
-                    </div>
                 </div>
             </form>
             <p class="login-note">This login panel uses a transparent glass effect so the vibrant Maaza background can shine through.</p>
@@ -294,8 +302,10 @@
             });
 
             const loginPage = document.getElementById('login-page');
-            const continueGuest = document.getElementById('continue-guest');
             const loginForm = document.getElementById('login-form');
+            const postLoginLoader = document.getElementById('post-login-loader');
+            const postLoginProgressBar = document.getElementById('post-login-progress-bar');
+            const postLoginProgressPercent = document.getElementById('post-login-progress-percent');
 
             function closeLoginOverlay(event) {
                 if (event) event.preventDefault();
@@ -303,10 +313,28 @@
                 document.body.style.overflow = '';
             }
 
-            continueGuest.addEventListener('click', closeLoginOverlay);
+            function showPostLoginLoader() {
+                postLoginLoader.style.display = 'flex';
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            postLoginLoader.style.display = 'none';
+                            document.body.style.overflow = '';
+                        }, 500);
+                    }
+                    postLoginProgressBar.style.width = progress + '%';
+                    postLoginProgressPercent.textContent = Math.floor(progress) + '%';
+                }, 200);
+            }
+
             loginForm.addEventListener('submit', function(event) {
                 event.preventDefault();
-                closeLoginOverlay();
+                loginPage.classList.add('hidden');
+                showPostLoginLoader();
             });
 
             document.body.style.overflow = 'hidden';

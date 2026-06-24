@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaza - Scroll Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="scroll.css">
+    <style>
+        /* Particle trail for cursor movement */
+        .particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 165, 0, 0.8) 50%, transparent 100%);
+            transform: translate(-50%, -50%);
+            animation: particle-fade 0.8s ease-out forwards;
+            z-index: 9999;
+            box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes particle-fade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="logo-loader">maaza</div>
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <p class="loader-text">Loading Mango Indulgence... <span id="progress-percent">0%</span></p>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="logo">maaza</div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Back to Home</a>
+        </nav>
+        <div class="logo-symbol">🥭</div>
+    </header>
+
+    <!-- Background Grid Effect -->
+    <div class="bg-grid"></div>
+
+    <!-- Main Scroll Container -->
+    <main class="scroll-container">
+        <!-- Canvas Container fixed in viewport -->
+        <div class="canvas-wrapper">
+            <canvas id="animation-canvas"></canvas>
+            <div class="canvas-overlay"></div>
+        </div>
+
+        <!-- Overlaid Text Sections (Scroll Linked) -->
+        <section class="scroll-section active" id="experience">
+            <div class="section-content text-center">
+                <h2 class="sub-title">A Symphony of Mangoes</h2>
+                <h1 class="main-title text-glow">MAAZA</h1>
+                <p class="description">Scroll down to unbottle the ultimate mango indulgence.</p>
+            </div>
+        </section>
+
+        <section class="scroll-section" id="sec-2">
+            <div class="section-content left-align">
+                <span class="tag">01 / Pure Sensation</span>
+                <h2 class="section-heading">Experience the Burst</h2>
+                <p class="section-desc">Every drop contains the richness of handpicked Alphonso and Totapuri mangoes, delivering a burst of authentic pulpy flavor.</p>
+            </div>
+        </section>
+
+        <section class="scroll-section" id="sec-3">
+            <div class="section-content right-align">
+                <span class="tag">02 / Pure Craftsmanship</span>
+                <h2 class="section-heading">Swirled to Perfection</h2>
+                <p class="section-desc">An intense vortex of mango nectar, carefully blended to achieve the signature thick, smooth consistency you love.</p>
+            </div>
+        </section>
+
+        <section class="scroll-section" id="sec-4">
+            <div class="section-content text-center">
+                <span class="tag">03 / The Revelation</span>
+                <h2 class="section-heading text-glow">Unbottle the Magic</h2>
+                <p class="section-desc max-w-md">The wait is over. Taste the richness of India's favorite mango drink, crafted to perfection for a lifetime of sweet memories.</p>
+            </div>
+        </section>
+
+        <!-- Static Features/Footer section that scrolls up normally after animation ends -->
+        <section class="info-section" id="features">
+            <div class="container">
+                <h2 class="features-title">What Makes Maaza Special?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="card-icon">🥭</div>
+                        <h3>Real Mango Pulp</h3>
+                        <p>Made from the finest king of mangoes, giving you a thick, luscious taste in every sip.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Instant Refreshment</h3>
+                        <p>Perfect for hot summer days or whenever you need a sweet, tropical escape.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">🍯</div>
+                        <h3>Rich Consistency</h3>
+                        <p>Thicker than average juices, bringing you closer to eating a real, juicy mango.</p>
+                    </div>
+                </div>
+
+                <!-- Product Display Grid -->
+                <div class="product-showcase">
+                    <div class="product-info-panel">
+                        <h2>The Taste of India</h2>
+                        <p>For decades, Maaza has been synonymous with the love for mangoes. It is not just a drink; it's a celebration of sweetness, family gatherings, and pure joy.</p>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-value">100%</span>
+                                <span class="spec-label">Love</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-value">Premium</span>
+                                <span class="spec-label">Quality</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-value">Classic</span>
+                                <span class="spec-label">Recipe</span>
+                            </div>
+                        </div>
+                        <a href="https://www.amazon.in/Maaza-1-2L/dp/B00GX9TS6O/ref=sr_1_1_in_f3_0o_fs?dib=eyJ2IjoiMSJ9.SVy-6ZiKjxShctJE1QvAiHfAXUNRw0bEUDyVUQlsPH1DSLDkoBNu0ntknfG_H7nGlByMduIHZnaWqWxmkulrX_M3OOnw7oVWGAuuo9HgGKEfgQUMLo7qA71RIEO59BLooRSlqeA4wXy1Y60A3AotEK7WCBjboen32hKpx5NKgPQGEnO-V-esY-rfFH8Q2X2cVspWQvseN7v-S-WiYOcPKLBmUewBNmu-lxkvAMG37ZsMe20K1lGo4IJSDCzh2WXBxrnAkD2mNxiCPWAN4eG_PZm_tHtTi7mX2eDbZfR7Xg.dAhhrgBn7DvRpYbl5Mx_62w3Wov0yVxmIJGwKD2AIoM&dib_tag=se&keywords=maaza&nsdOptOutParam=true&qid=1781796300&sr=8-1&th=1" target="_blank" rel="noopener noreferrer" class="btn-primary btn-large">Order Online Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Maaza Fan Page. All rights reserved.</p>
+            <p class="footer-sub">Experience the sweet juice scroll experience.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Animation JavaScript -->
+    <script src="scroll.js"></script>
+    <script>
+        (function(){
+            let lastTrail = 0;
+            const trailThrottle = 12;
+
+            function createReptileTrail(x, y) {
+                const particleCount = 5;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('span');
+                    particle.className = 'particle';
+                    const offsetX = (Math.random() - 0.5) * 30;
+                    const offsetY = (Math.random() - 0.5) * 30;
+                    particle.style.left = (x + offsetX) + 'px';
+                    particle.style.top = (y + offsetY) + 'px';
+                    particle.style.animationDelay = (Math.random() * 0.1) + 's';
+                    document.body.appendChild(particle);
+                    particle.addEventListener('animationend', () => particle.remove());
+                }
+            }
+
+            function onMove(e) {
+                const now = Date.now();
+                if (now - lastTrail < trailThrottle) return;
+                lastTrail = now;
+                createReptileTrail(e.clientX, e.clientY);
+                createReptileTrail(e.clientX + 3, e.clientY + 3);
+            }
+
+            document.addEventListener('mousemove', onMove, {passive:true});
+            document.addEventListener('touchmove', function(e){
+                if (e.touches && e.touches[0]) {
+                    onMove(e.touches[0]);
+                }
+            }, {passive:true});
+        })();
+    </script>
+</body>
+</html>
